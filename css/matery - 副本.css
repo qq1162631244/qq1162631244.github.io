@@ -9,15 +9,21 @@
 /*中等屏幕下(平板类)的样式*/
 @media only screen and (min-width: 600px) and (max-width: 992px) {
     .container {
-        width: 95%;
+        width: 90%;
     }
 }
 
 /*大屏幕下(桌面类)的样式*/
 @media only screen and (min-width: 993px) {
     .container {
-        width: 85%;
+        width: 90%;
         max-width: 1125px;
+    }
+
+    .head-container {
+        position: absolute;
+        padding: 0px 30px;
+        width: 100%;
     }
 
     .post-container {
@@ -31,14 +37,9 @@ body {
     background-color: #eaeaea;
     margin: 0;
     color: #34495e;
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/0123382c12a7d16870a7/default.cur),auto;
 }
 
-a:hover{
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/8c8125a00fcb6b239624/pointer.cur),auto;
-}
-
-/* h1 {
+h1 {
     margin: 48px 0 22px -5px;
     font-size: 2.0rem;
     font-weight: bold;
@@ -77,47 +78,6 @@ h6 {
     margin: 22px 0 4px -4px;
     font-size: 1.1rem;
     line-height: 1.1rem;
-} */
-
-h1 {
-    margin: 38px 0 22px -5px;
-    font-size: 2.0rem;
-    font-weight: bold;
-    line-height: 2.0rem;
-}
-
-h2 {
-    margin: 32px 0 18px -5px;
-    font-size: 1.8rem;
-    font-weight: bold;
-    line-height: 1.8rem;
-}
-
-h3 {
-    margin: 28px 0 15px -4px;
-    font-size: 1.6rem;
-    font-weight: bold;
-    line-height: 1.7rem;
-}
-
-h4 {
-    margin: 24px 0 12px -4px;
-    font-size: 1.45rem;
-    font-weight: bold;
-    line-height: 1.45rem;
-}
-
-h5 {
-    margin: 20px 0 8px -4px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    line-height: 1.2rem;
-}
-
-h6 {
-    margin: 16px 0 4px -4px;
-    font-size: 1.1rem;
-    line-height: 1.1rem;
 }
 
 p {
@@ -138,19 +98,12 @@ blockquote {
     background-color: rgba(66, 185, 131, .1);
 }
 
-/*原文件的代码行样式
-pre {
-    padding: 1.5rem !important;
-    margin: 1rem 0 !important;
-    background: #272822;
-    overflow: auto;
-    border-radius: 0.35rem;
-    tab-size: 4;
+.line-numbers-rows {
+    border-right-width: 0px !important;
 }
-*/
-/*修改一下才能正确显示行号,而不是一条竖线 */
-pre {
-    padding: 1.5rem 1.5rem 1.5rem 3.3rem !important;
+
+.line-numbers {
+    padding: 1.5rem 1.5rem 1.5rem 3.5rem !important;
     margin: 1rem 0 !important;
     background: #272822;
     overflow: auto;
@@ -158,13 +111,88 @@ pre {
     tab-size: 4;
 }
 
+pre {
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem !important;
+    margin: 1rem 0 !important;
+    background: #272822;
+    overflow: auto;
+    border-radius: 0.35rem;
+    tab-size: 4;
+}
+
+.code-area::after {
+    content: " ";
+    position: absolute;
+    border-radius: 50%;
+    background: #ff5f56;
+    width: 12px;
+    height: 12px;
+    top: 0;
+    left: 12px;
+    margin-top: 12px;
+    -webkit-box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
+    box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
+}
+
 code {
     padding: 1px 5px;
+    top: 13px !important;
     font-family: Inconsolata, Monaco, Consolas, 'Courier New', Courier, monospace;
-    /*font-size: 0.91rem;*/
+    font-size: 0.91rem;
     color: #e96900;
     background-color: #f8f8f8;
     border-radius: 2px;
+}
+
+.code_copy {
+    position: absolute;
+    top: 0.7rem;
+    right: 25px;
+    z-index: 1;
+    filter: invert(50%);
+    cursor: pointer;
+}
+
+.codecopy_notice {
+    position: absolute;
+    top: 0.7rem;
+    right: 6px;
+    z-index: 1;
+    filter: invert(50%);
+    opacity: 0;
+}
+
+.code_lang {
+    position: absolute;
+    top: 1.2rem;
+    right: 46px;
+    line-height: 0;
+    font-weight: bold;
+    font-family: normal;
+    z-index: 1;
+    filter: invert(50%);
+    cursor: pointer;
+} 
+
+.code-expand {
+    position: absolute;
+    top: 4px;
+    right: 0px;
+    filter: invert(50%);
+    padding: 7px;
+    z-index: 999 !important;
+    cursor: pointer;
+    transition: all .3s;
+    transform: rotate(0deg);
+}
+
+.code-closed .code-expand {
+    transform: rotate(-180deg) !important;
+    transition: all .3s;
+}
+
+.code-closed pre::before {
+    height: 0px;
 }
 
 pre code {
@@ -207,13 +235,12 @@ mark {
 }
 
 .card {
-    border-radius: 5px;
-    /* 原值 10px */
+    border-radius: 10px;
     box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07) !important;
 }
 
 .card .card-image img {
-    border-radius: 5px 5px 0 0;
+    border-radius: 8px 8px 0 0;
 }
 
 .container .row {
@@ -221,9 +248,7 @@ mark {
 }
 
 .bg-color {
-    background-image: linear-gradient(to right, #bf30ac 0%, #0f9d58 100%);
-    opacity: 0.9;
-    /* 透明度*/
+    background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
 }
 
 .text-color {
@@ -235,12 +260,12 @@ mark {
 }
 
 .progress-bar {
-    height: 5px;
+    height: 4px;
     position: fixed;
     bottom: 0;
     z-index: 300;
-    background: linear-gradient(to right, #bf30ac 0%, #0f9d58 100%);
-    opacity: 0.7;
+    background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+    opacity: 0.8;
 }
 
 .sidenav-overlay {
@@ -290,22 +315,20 @@ header .side-nav .mobile-head {
 }
 
 header .side-nav .mobile-head img {
-    margin-top: 15px;
-    /* 调整移动端头像位置，原值 30px; */
+    margin-top: 30px;
     width: 75px;
     height: 75px;
 }
 
 header .side-nav .mobile-head .logo-name {
     margin-top: -30px;
-    /*修改移动端侧边栏顶部没有图标时显示不全，改为0即可，原值-30px和上面img的magin对应*/
-    /* padding-left: 10px; */
+    padding-left: 10px;
     font-size: 1.5rem;
 }
 
 header .side-nav .mobile-head .logo-desc {
     margin-top: -10px;
-    /* padding-left: 10px; */
+    padding-left: 10px;
     padding-bottom: 10px;
     font-size: 0.8rem;
     line-height: 1.3rem;
@@ -341,7 +364,7 @@ header .side-nav .social-link {
 }
 
 .social-link a {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     display: inline;
     padding: 0 12px;
 }
@@ -368,7 +391,9 @@ header .side-nav .social-link {
 .cover-btns a:hover {
     border: 1px solid #f44336;
     background-color: #f44336;
-    box-shadow: 0 14px 26px -12px rgba(233, 30, 99, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(233, 30, 99, 0.2);
+    box-shadow: 0 14px 26px -12px rgba(233, 30, 99, 0.42),
+            0 4px 23px 0 rgba(0, 0, 0, 0.12),
+            0 8px 10px -5px rgba(233, 30, 99, 0.2);
 }
 
 .cover-btns a i {
@@ -376,9 +401,112 @@ header .side-nav .social-link {
     padding-right: 5px;
 }
 
+.scroll-down {
+    background: #333;
+    margin: 100px auto;
+    -webkit-animation: scroll-down 1.5s infinite;
+    -moz-animation: scroll-down 1.5s infinite;
+    -o-animation: scroll-down 1.5s infinite;
+    -ms-animation: scroll-down1.5s infinite;
+    animation: scroll-down 1.5s infinite;
+}
+
+@-moz-keyframes scroll-down {
+    0% {
+        opacity: 0.4;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        top: 0;
+    }
+
+    50% {
+        opacity: 1;
+        -ms-filter: none;
+        filter: none;
+        top: -16px;
+    }
+
+    100% {
+        opacity: 0.4;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        top: 0;
+    }
+}
+
+@-webkit-keyframes scroll-down {
+    0% {
+        opacity: 0.4;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        top: 0;
+    }
+
+    50% {
+        opacity: 1;
+        -ms-filter: none;
+        filter: none;
+        top: -16px;
+    }
+
+    100% {
+        opacity: 0.4;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        top: 0;
+    }
+}
+
+@-o-keyframes scroll-down {
+    0% {
+        opacity: 0.4;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        top: 0;
+    }
+
+    50% {
+        opacity: 1;
+        -ms-filter: none;
+        filter: none;
+        top: -16px;
+    }
+
+    100% {
+        opacity: 0.4;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        top: 0;
+    }
+}
+
+@keyframes scroll-down {
+    0% {
+        opacity: 0.4;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        top: 0;
+    }
+
+    50% {
+        opacity: 1;
+        -ms-filter: none;
+        filter: none;
+        top: -16px;
+    }
+
+    100% {
+        opacity: 0.4;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        filter: alpha(opacity=40);
+        top: 0;
+    }
+}
+
 .cover-social-link {
     position: relative;
-    top: 18vh;
+    top: 23vh;
+    width: 100%;
     text-align: center;
 }
 
@@ -426,10 +554,8 @@ header .go-back i {
 }
 
 .bg-cover:after {
-    -webkit-animation: rainbow 30s infinite;
-    /* 原值 60s */
-    animation: rainbow 30s infinite;
-    /* 原值 60s */
+    -webkit-animation: rainbow 60s infinite;
+    animation: rainbow 60s infinite;
 }
 
 .bg-cover:before,
@@ -452,65 +578,26 @@ header .go-back i {
 
 .bg-cover .title {
     font-size: 4rem;
-    font-weight: 700;
     line-height: 1.85em;
     margin-bottom: 20px;
     position: relative;
 }
 
 .bg-cover .description {
-    font-size: 1.25rem;
     font-weight: 300;
+    font-size: 1.25rem;
     line-height: 1.4em;
     color: #eee;
 }
 
 .bg-cover .post-title {
-    font-size: 1.9rem;
+    margin: 0 auto;
+    font-size: 2.5rem;
+    font-weight: 400;
 }
 
 @-webkit-keyframes rainbow {
-    /* 0%,
-    100% {
-        background: rgba(156, 39, 176, 0.75);
-        background: linear-gradient(45deg, rgba(156, 39, 176, 0.75) 0%, rgba(156, 39, 176, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(156, 39, 176, 0.75) 0%, rgba(156, 39, 176, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(156, 39, 176, 0.75) 0%, rgba(156, 39, 176, 0.65) 100%);
-    }
-    16% {
-        background: rgba(132, 13, 121, 0.75);
-        background: linear-gradient(45deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
-    }
-    32% {
-        background: rgba(239, 83, 80, 0.75);
-        background: linear-gradient(45deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
-    }
-    48% {
-        background: rgba(255, 87, 34, 0.75);
-        background: linear-gradient(45deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
-    }
-    64% {
-        background: rgba(255, 160, 0, 0.75);
-        background: linear-gradient(45deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 112, 66, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
-    }
-    80% {
-        background: rgba(233, 30, 99, 0.75);
-        background: linear-gradient(45deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
-    }*/
 
-}
-
-/* @keyframes rainbow {
     0%,
     100% {
         background: rgba(156, 39, 176, 0.75);
@@ -518,85 +605,96 @@ header .go-back i {
         background: -moz-linear-gradient(135deg, rgba(156, 39, 176, 0.75) 0%, rgba(156, 39, 176, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(156, 39, 176, 0.75) 0%, rgba(156, 39, 176, 0.65) 100%);
     }
+
     16% {
         background: rgba(132, 13, 121, 0.75);
         background: linear-gradient(45deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
         background: -moz-linear-gradient(135deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
     }
+
     32% {
         background: rgba(239, 83, 80, 0.75);
         background: linear-gradient(45deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
         background: -moz-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
     }
+
     48% {
         background: rgba(255, 87, 34, 0.75);
         background: linear-gradient(45deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
         background: -moz-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
     }
+
     64% {
         background: rgba(255, 160, 0, 0.75);
         background: linear-gradient(45deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
         background: -moz-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 112, 66, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
     }
+
     80% {
         background: rgba(233, 30, 99, 0.75);
         background: linear-gradient(45deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
         background: -moz-linear-gradient(135deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
     }
-} */
-/* 换成:红橙黄绿青蓝紫 背景渐变 */
+}
+
 @keyframes rainbow {
-    /* 0%,
+
+    0%,
     100% {
-        background: rgb(255, 0, 0);
-        background: linear-gradient(45deg, rgba(255, 0, 0, 0.3) 0%, rgba(255, 165, 0, 0.3) 100%);
+        background: rgba(156, 39, 176, 0.75);
+        background: linear-gradient(45deg, rgba(156, 39, 176, 0.75) 0%, rgba(156, 39, 176, 0.65) 100%);
+        background: -moz-linear-gradient(135deg, rgba(156, 39, 176, 0.75) 0%, rgba(156, 39, 176, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(156, 39, 176, 0.75) 0%, rgba(156, 39, 176, 0.65) 100%);
     }
+
     16% {
-        background: rgb(255, 165, 0);
-        background: linear-gradient(45deg, rgba(255, 165, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 100%);
+        background: rgba(132, 13, 121, 0.75);
+        background: linear-gradient(45deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
+        background: -moz-linear-gradient(135deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(132, 13, 121, 0.75) 0%, rgba(132, 13, 121, 0.65) 100%);
     }
+
     32% {
-        background: rgb(255, 255, 0);
-        background: linear-gradient(45deg, rgba(255, 255, 0, 0.3) 0%, rgba(0, 255, 0, 0.3) 100%);
+        background: rgba(239, 83, 80, 0.75);
+        background: linear-gradient(45deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
+        background: -moz-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
     }
+
     48% {
-        background: rgb(0, 255, 0);
-        background: linear-gradient(45deg, rgba(0, 255, 0, 0.3) 0%, rgba(0, 127, 255, 0.3) 100%);
+        background: rgba(255, 87, 34, 0.75);
+        background: linear-gradient(45deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
+        background: -moz-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
     }
+
     64% {
-        background: rgb(0, 127, 255);
-        background: linear-gradient(45deg, rgba(0, 127, 255, 0.3) 0%, rgba(0, 0, 255, 0.3) 100%);
+        background: rgba(255, 160, 0, 0.75);
+        background: linear-gradient(45deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
+        background: -moz-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 112, 66, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
     }
+
     80% {
-        background: rgb(0, 0, 255);
-        background: linear-gradient(45deg, rgba(0, 0, 255, 0.3) 0%, rgba(139, 0, 255, 0.3) 100%);
-    } */
-}
-
-.carousel .indicators {
-    padding-bottom: 10px !important;
-}
-
-.carousel-control:hover{
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/8c8125a00fcb6b239624/pointer.cur),auto;
+        background: rgba(233, 30, 99, 0.75);
+        background: linear-gradient(45deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
+        background: -moz-linear-gradient(135deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
+    }
 }
 
 .index-card {
-    margin-top: -50px;
+    margin-top: -10px;
     padding-top: 20px;
 }
 
 .carousel-post .title {
     font-size: 2.6rem;
-}
-
-.carousel-post .cover-btns a {
-    margin-top: -30px;
 }
 
 .dream {
@@ -620,12 +718,9 @@ header .go-back i {
 .music-player,
 .video-player {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
 }
 
-.aplayer-list:hover{
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/8c8125a00fcb6b239624/pointer.cur),auto;
-}
 .music,
 .dplayer-video {
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .2), 0 10px 20px -12px rgba(0, 0, 0, .5) !important;
@@ -636,12 +731,8 @@ header .go-back i {
     padding-top: 30px;
 }
 
-/* .index-card .card .card-content {
-    padding: 20px 40px;
-} */
-
 .index-card .card .card-content {
-    padding: 5px 5px;
+    padding: 20px 40px;
 }
 
 @media only screen and (min-width: 1418px) {
@@ -665,15 +756,12 @@ header .go-back i {
 }
 
 .recommend .row .col {
-    padding: 0 1.0rem;
-    /*原值1.25rem*/
+    padding: 0 1.25rem;
 }
 
 .recommend .title {
-    margin-top: 10px;
-    /*原值25*/
-    margin-bottom: 10px;
-    /*原值25*/
+    margin-top: 25px;
+    margin-bottom: 25px;
     text-align: center;
     font-size: 1.8rem;
     font-weight: 700;
@@ -800,14 +888,13 @@ article a:hover {
 }
 
 article .card {
-    border-radius: 5px;
-    /*原值 8px*/
+    border-radius: 8px;
     overflow: hidden;
-    /* 解决文章卡片上方border-radius失效的bug */
 }
 
 article .card-image {
     background-color: #222;
+    border-radius: 8px;
 }
 
 article .card-image img {
@@ -881,11 +968,11 @@ article .article-tags .chip {
 }
 
 .prev-next .left-badge {
-    border-radius: 0 5px 5px 0;
+    border-radius: 8px 0 8px 0;
 }
 
 .prev-next .right-badge {
-    border-radius: 5px 0 0 5px;
+    border-radius: 0 8px 0 8px;
     right: 10px;
 }
 
@@ -950,29 +1037,39 @@ article .article-tags .chip {
     text-transform: none !important;
 }
 
-/* #artDetail .article-info {
+#artDetail .article-info {
     padding: 20px 30px 1px 40px;
     margin-bottom: -5px;
-} */
-
-#artDetail .article-info {
-    padding: 20px 20px 1px 25px;
-    margin-bottom: -5px;
-}
-
-#artDetail .article-tag {
-    float: left;
 }
 
 #artDetail .article-tag .chip {
     font-size: 1rem;
     font-weight: 400;
     height: 25px;
-    line-height: 25px;
+    line-height: 24px;
     color: #fff;
     border-radius: 15px;
     margin-right: 5px;
     margin-bottom: 2px;
+}
+
+#artDetail .tag_share .article-tag .chip {
+    font-size: 1rem;
+    font-weight: 400;
+    height: 25px;
+    line-height: 23px;
+    border-radius: 15px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+    color: #42b983;
+    background: #fff;
+    border: 1px solid;
+    transition: all 0.6s ease-in-out;
+}
+
+#artDetail .tag_share .article-tag .chip:hover {
+    color: #fff;
+    background: #42b983;
 }
 
 #artDetail .post-cate {
@@ -1040,44 +1137,23 @@ article .article-tags .chip {
     }
 }
 
-/* @media only screen and (min-width: 993px) {
+@media only screen and (min-width: 993px) {
     #artDetail .article-card-content {
         padding: 0 50px 20px 50px;
     }
-} */
-
-@media only screen and (min-width: 993px) {
-    #artDetail .article-card-content {
-        padding: 0 25px 20px 25px;
-    }
 }
 
-/*下面连着三段是老版reprint样式*/
-#artDetail .reprint1 {
-    margin: 15px 0 5px 0;
-}
-
-#artDetail .reprint1 .reprint1-tip {
-    margin-right: 3px;
-    font-size: 1.05rem;
-    font-weight: 500;
-}
-
-#artDetail .reprint1 a {
-    font-size: 1.05rem;
-    color: #42b983;
-    font-weight: 500;
-}
-
-/*下面连着三段是reprint-statement样式*/
 #artDetail .reprint {
     margin: 15px 0 5px 0;
+    margin-bottom: 0.4rem;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #eee;
+    line-height: 2;
+    transition: box-shadow 0.3s ease-in-out
 }
 
-#artDetail .reprint .reprint-tip {
-    margin: 0 3px 22px 0;
-    font-size: 1.5rem;
-    font-weight: 500;
+#artDetail .reprint:hover {
+    box-shadow: 0 0 10px 0 rgba(232, 237, 250, .6), 0 4px 8px 0 rgba(232, 237, 250, .5)
 }
 
 #artDetail .reprint a {
@@ -1111,14 +1187,14 @@ article .article-tags .chip {
 #articleContent img {
     max-width: 100%;
     height: auto;
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/8c8125a00fcb6b239624/pointer.cur),auto;
+    cursor: pointer;
 }
 
 #articleContent video {
     display: block;
     margin: 30px auto;
     box-shadow: 0 5px 35px 0 rgba(0, 0, 0, .2), 0 10px 35px -11px rgba(0, 0, 0, .6);
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/8c8125a00fcb6b239624/pointer.cur),auto;
+    cursor: pointer;
 }
 
 #articleContent ol,
@@ -1175,14 +1251,9 @@ thead {
     visibility: visible;
 }
 
-#article-share .social-share {
-    text-align: center;
-    margin: 30px 0;
-}
-
 @media only screen and (min-width: 600px) {
     #article-share .social-share a {
-        margin-right: 15px !important;
+        margin-left: 15px !important;
     }
 }
 
@@ -1219,16 +1290,13 @@ thead {
 
 .chip-container .chip {
     margin: 10px 10px;
-    padding: 0 14px;
-    display: inline-block;
-    height: 38px;
-    min-width: 80px;
-    line-height: 39px;
+    padding: 19px 14px;
+    display: inline-flex;
+    line-height: 0;
     font-size: 1rem;
     font-weight: 500;
     border-radius: 5px;
-    word-wrap: break-word;
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/8c8125a00fcb6b239624/pointer.cur),auto;
+    cursor: pointer;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .12);
 }
 
@@ -1245,6 +1313,7 @@ thead {
 
 .chip-default .tag-length {
     color: #e91e63;
+    margin-top: 1px;
 }
 
 .chip-active .tag-length {
@@ -1491,19 +1560,8 @@ thead {
     }
 }
 
-.contact-container {
-    width: 90%;
-    max-width: 900px;
-    margin-top: -60px;
-}
-
-@media only screen and (max-width: 600px) {
-    .contact-container {
-        width: 95%;
-    }
-}
-
 /* about page styles. */
+
 .about-container {
     width: 90%;
     max-width: 1225px;
@@ -1558,7 +1616,6 @@ thead {
     color: #fff;
     border: 1px solid #0f9d58;
     background: radial-gradient(#4cbf30, #0f9d58);
-    ;
     font-size: 0.9rem;
     border-radius: 50%;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .21), 0 2px 3px rgba(0, 0, 0, .1);
@@ -1614,17 +1671,9 @@ thead {
 .title,
 .my-projects .title,
 .my-skills .title,
-.my-gallery .title{
+.my-gallery .title {
     font-size: 2rem;
     margin-bottom: 2.25rem;
-}
-
-.my-gallery .title{
-    font-weight: 700;
-}
-
-my-gallery:hover{
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/8c8125a00fcb6b239624/pointer.cur),auto;
 }
 
 .my-projects .info {
@@ -1743,7 +1792,6 @@ my-gallery:hover{
 .other-skills .chip:hover {
     color: #fff;
     background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
-    ;
     border: 1px solid #4cbf30;
     box-shadow: 0 5px 5px rgba(0, 0, 0, .25)
 }
@@ -1762,7 +1810,7 @@ my-gallery:hover{
     width: 100%;
     height: 200px;
     border-radius: 10px;
-    cursor: url(https://lc-0OwJ6sYh.cn-e1.lcfile.com/8c8125a00fcb6b239624/pointer.cur),auto;
+    cursor: pointer;
 }
 
 /*尾部样式*/
@@ -1770,17 +1818,13 @@ footer {
     padding-bottom: 1px;
 }
 
-
 footer .social-statis {
-    margin-top: 26px;
-    /* 原值 10px; */
+    margin-top: 10px;
     position: relative;
 }
 
-
 footer a {
-    /* color: #fff; */
-    color: #dbdbdb;
+    color: #fff;
 }
 
 footer .copy-right {
@@ -1828,7 +1872,7 @@ footer .copy-right {
     border-radius: 2px;
     background-color: #f2f2f2;
     color: #e96900;
-    font-size: .9rem;
+    font-style: normal;
     white-space: pre-wrap;
 }
 
@@ -1837,7 +1881,6 @@ footer .copy-right {
     display: none;
     position: fixed;
     right: 15px;
-    /* 20px*/
     bottom: 15px;
     padding-top: 15px;
     margin-bottom: 0;
@@ -1895,12 +1938,8 @@ footer .copy-right {
     box-shadow: 0 5px 25px 0 rgba(0, 0, 0, .2), 0 10px 30px -11px rgba(0, 0, 0, .6)
 }
 
-/* .img-margin {
-    margin: 25px auto 10px auto;
-} */
-
 .img-margin {
-    margin: 2px auto 5px auto;
+    margin: 25px auto 10px auto;
 }
 
 .caption {
@@ -1932,8 +1971,7 @@ footer .copy-right {
     /* use this value to count block height */
     line-height: 1.5em;
     /* max-height = line-height (1.2) * lines max number (3) */
-    max-height: 3em;
-    /* 原值4.5em三行,改为固定两行显示为3em */
+    max-height: 4.5em;
     /* fix problem when last visible word doesn't adjoin right side  */
     text-align: justify;
     /* place for '...' */
@@ -1968,12 +2006,14 @@ footer .copy-right {
     background: white;
 }
 
-/* 二级菜单样式定义 */
-.nav-menu {}
+/*二级菜单*/
+
+.nav-menu {
+}
 
 .nav-menu li .sub-nav {
     position: absolute;
-    top: 77px;
+    top: 66px;
     list-style: none;
     margin-left: -20px;
     display: none;
@@ -2041,16 +2081,14 @@ footer .copy-right {
 
 .m-nav-item {
     position: relative;
-    left: 45px
 }
 
 .m-nav-item ul {
     display: none;
-    background: rgba(255, 255, 255, .1);
 }
 
 .m-nav-item ul li {
-    width: 245px;
+    width: 255px;
     height: 50px;
     line-height: 50px;
     text-align: center;
@@ -2069,25 +2107,21 @@ footer .copy-right {
     transition: all .3s;
 }
 
-.m-nav-show .m-nav-item>a:hover {
+.m-nav-show,
+.m-nav-item > a:hover {
     color: #FFF;
     background: rgba(255, 255, 255, .8);
 }
 
-.m-nav-show>a:before,
-.m-nav-item>a:hover:before {
+.m-nav-show > a:before,
+.m-nav-item > a:hover:before {
     opacity: 1;
 }
 
 .m-nav-item .m-icon {
     position: absolute;
-    right: 65px;
+    right: 15px;
     height: 50px;
     padding: 0px;
     margin: 0px;
-}
-
-.nav-item li:hover a {
-    color: #FFF;
-    background: rgba(0, 0, 0, .1);
 }
