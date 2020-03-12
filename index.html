@@ -669,7 +669,15 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
-    <script src="/js/xuehuapiaoluo.js"></script>
+
+        <!-- 背景雪花飘落特效 -->
+            <script type="text/javascript">
+                var windowWidth = $(window).width();
+                if (windowWidth > 768) {
+                    document.write('<script type="text/javascript" src="/js/xuehuapiaoluo.js"><\/script>');
+                }
+            </script>
+
     <script src="/js/sakura.js"></script>
     <script src="/js/wenzi.js"></script>
     <script src="/js/mouseSlip.js"></script>
