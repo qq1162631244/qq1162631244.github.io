@@ -5,9 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="hexo搭建个人博客, 哀机">
-    <meta name="description" content="hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code
-安装步骤npm config set registry https://registry.npm.taobao.org    #配置国内的镜像源
-n">
+    <meta name="description" content="hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code    4.Typora
+安装步骤npm config set registry https://registry.npm.taobao.org   ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -361,14 +360,14 @@ n">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    119
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    8 分
                 </div>
                 
 				
@@ -379,7 +378,7 @@ n">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="hexo搭建个人博客"><a href="#hexo搭建个人博客" class="headerlink" title="hexo搭建个人博客"></a>hexo搭建个人博客</h1><h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p>1.Node.js    2.git    3.Vs Code</p>
+                <h1 id="hexo搭建个人博客"><a href="#hexo搭建个人博客" class="headerlink" title="hexo搭建个人博客"></a>hexo搭建个人博客</h1><h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p><strong>1.Node.js    2.git    3.Vs Code    4.Typora</strong></p>
 <h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><pre><code>npm config set registry https://registry.npm.taobao.org    #配置国内的镜像源
 npm install -g hexo                                        #通过npm安装hexo
 hexo init                                                  #初始化hexo文件
@@ -388,7 +387,36 @@ npm install hexo-asset-image --save                        #安装hexo图片上�
 hexo c                                                     #清除所有记录
 hexo g                                                     #生成静态网页
 hexo s                                                     #启动服务
-hexo d                                                     #将静态网页上传到仓库</code></pre><h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/jpg/1.png" alt=""></p>
+hexo d                                                     #将静态网页上传到仓库</code></pre><h2 id="美化博客"><a href="#美化博客" class="headerlink" title="美化博客"></a>美化博客</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener"><strong>hexo-theme-matery</strong></a></p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>简单漂亮，文章内容美观易读</li>
+<li><a href="https://material.io/" target="_blank" rel="noopener">Material Design</a> 设计</li>
+<li>响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现</li>
+<li>首页轮播文章及每天动态切换 <code>Banner</code> 图片</li>
+<li>瀑布流式的博客文章列表（文章无特色图片时会有 <code>24</code> 张漂亮的图片代替）</li>
+<li>时间轴式的归档页</li>
+<li><strong>词云</strong>的标签页和<strong>雷达图</strong>的分类页</li>
+<li>丰富的关于我页面（包括关于我、文章统计图、我的项目、我的技能、相册等）</li>
+<li>可自定义的数据的友情链接页面</li>
+<li>支持文章置顶和文章打赏</li>
+<li>支持 <code>MathJax</code></li>
+<li><code>TOC</code> 目录</li>
+<li>可设置复制文章内容时追加版权信息</li>
+<li>可设置阅读文章时做密码验证</li>
+<li><a href="https://gitalk.github.io/" target="_blank" rel="noopener">Gitalk</a>、<a href="https://imsun.github.io/gitment/" target="_blank" rel="noopener">Gitment</a>、<a href="https://valine.js.org/" target="_blank" rel="noopener">Valine</a> 和 <a href="https://disqus.com/" target="_blank" rel="noopener">Disqus</a> 评论模块（推荐使用 <code>Gitalk</code>）</li>
+<li>集成了<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener">不蒜子统计</a>、谷歌分析（<code>Google Analytics</code>）和文章字数统计等功能</li>
+<li>支持在首页的音乐播放和视频播放功能</li>
+<li>支持<code>emoji</code>表情，用<code>markdown emoji</code>语法书写直接生成对应的能<strong>跳跃</strong>的表情。</li>
+<li>支持 <a href="http://www.daovoice.io/" target="_blank" rel="noopener">DaoVoice</a>、<a href="https://www.tidio.com/" target="_blank" rel="noopener">Tidio</a> 在线聊天功能。</li>
+</ul>
+<h2 id="实用小设置"><a href="#实用小设置" class="headerlink" title="实用小设置"></a>实用小设置</h2><p>所有网页在新标签页打开：在网页公共头部head部分写入<base target="_blank"/></p>
+<p>外部文件储存：<a href="https://www.leancloud.cn/" target="_blank" rel="noopener">leancloud</a></p>
+<p>【04】添加鼠标点击烟花爆炸效果<br>在 \themes\material-x\source\js 目录下新建一个 fireworks.js 的文件，里面写入以下代码：</p>
+<pre><code>&quot;use strict&quot;;function updateCoords(e){pointerX=(e.clientX||e.touches[0].clientX)-canvasEl.getBoundingClientRect().left,pointerY=e.clientY||e.touches[0].clientY-canvasEl.getBoundingClientRect().top}function setParticuleDirection(e){var t=anime.random(0,360)*Math.PI/180,a=anime.random(50,180),n=[-1,1][anime.random(0,1)]*a;return{x:e.x+n*Math.cos(t),y:e.y+n*Math.sin(t)}}function createParticule(e,t){var a={};return a.x=e,a.y=t,a.color=colors[anime.random(0,colors.length-1)],a.radius=anime.random(16,32),a.endPos=setParticuleDirection(a),a.draw=function(){ctx.beginPath(),ctx.arc(a.x,a.y,a.radius,0,2*Math.PI,!0),ctx.fillStyle=a.color,ctx.fill()},a}function createCircle(e,t){var a={};return a.x=e,a.y=t,a.color=&quot;#F00&quot;,a.radius=0.1,a.alpha=0.5,a.lineWidth=6,a.draw=function(){ctx.globalAlpha=a.alpha,ctx.beginPath(),ctx.arc(a.x,a.y,a.radius,0,2*Math.PI,!0),ctx.lineWidth=a.lineWidth,ctx.strokeStyle=a.color,ctx.stroke(),ctx.globalAlpha=1},a}function renderParticule(e){for(var t=0;t&lt;e.animatables.length;t++){e.animatables[t].target.draw()}}function animateParticules(e,t){for(var a=createCircle(e,t),n=[],i=0;i&lt;numberOfParticules;i++){n.push(createParticule(e,t))}anime.timeline().add({targets:n,x:function(e){return e.endPos.x},y:function(e){return e.endPos.y},radius:0.1,duration:anime.random(1200,1800),easing:&quot;easeOutExpo&quot;,update:renderParticule}).add({targets:a,radius:anime.random(80,160),lineWidth:0,alpha:{value:0,easing:&quot;linear&quot;,duration:anime.random(600,800)},duration:anime.random(1200,1800),easing:&quot;easeOutExpo&quot;,update:renderParticule,offset:0})}function debounce(e,t){var a;return function(){var n=this,i=arguments;clearTimeout(a),a=setTimeout(function(){e.apply(n,i)},t)}}var canvasEl=document.querySelector(&quot;.fireworks&quot;);if(canvasEl){var ctx=canvasEl.getContext(&quot;2d&quot;),numberOfParticules=30,pointerX=0,pointerY=0,tap=&quot;mousedown&quot;,colors=[&quot;#FF1461&quot;,&quot;#18FF92&quot;,&quot;#5A87FF&quot;,&quot;#FBF38C&quot;],setCanvasSize=debounce(function(){canvasEl.width=2*window.innerWidth,canvasEl.height=2*window.innerHeight,canvasEl.style.width=window.innerWidth+&quot;px&quot;,canvasEl.style.height=window.innerHeight+&quot;px&quot;,canvasEl.getContext(&quot;2d&quot;).scale(2,2)},500),render=anime({duration:1/0,update:function(){ctx.clearRect(0,0,canvasEl.width,canvasEl.height)}});document.addEventListener(tap,function(e){&quot;sidebar&quot;!==e.target.id&amp;&amp;&quot;toggle-sidebar&quot;!==e.target.id&amp;&amp;&quot;A&quot;!==e.target.nodeName&amp;&amp;&quot;IMG&quot;!==e.target.nodeName&amp;&amp;(render.play(),updateCoords(e),animateParticules(pointerX,pointerY))},!1),setCanvasSize(),window.addEventListener(&quot;resize&quot;,setCanvasSize,!1)}&quot;use strict&quot;;function updateCoords(e){pointerX=(e.clientX||e.touches[0].clientX)-canvasEl.getBoundingClientRect().left,pointerY=e.clientY||e.touches[0].clientY-canvasEl.getBoundingClientRect().top}function setParticuleDirection(e){var t=anime.random(0,360)*Math.PI/180,a=anime.random(50,180),n=[-1,1][anime.random(0,1)]*a;return{x:e.x+n*Math.cos(t),y:e.y+n*Math.sin(t)}}function createParticule(e,t){var a={};return a.x=e,a.y=t,a.color=colors[anime.random(0,colors.length-1)],a.radius=anime.random(16,32),a.endPos=setParticuleDirection(a),a.draw=function(){ctx.beginPath(),ctx.arc(a.x,a.y,a.radius,0,2*Math.PI,!0),ctx.fillStyle=a.color,ctx.fill()},a}function createCircle(e,t){var a={};return a.x=e,a.y=t,a.color=&quot;#F00&quot;,a.radius=0.1,a.alpha=0.5,a.lineWidth=6,a.draw=function(){ctx.globalAlpha=a.alpha,ctx.beginPath(),ctx.arc(a.x,a.y,a.radius,0,2*Math.PI,!0),ctx.lineWidth=a.lineWidth,ctx.strokeStyle=a.color,ctx.stroke(),ctx.globalAlpha=1},a}function renderParticule(e){for(var t=0;t&lt;e.animatables.length;t++){e.animatables[t].target.draw()}}function animateParticules(e,t){for(var a=createCircle(e,t),n=[],i=0;i&lt;numberOfParticules;i++){n.push(createParticule(e,t))}anime.timeline().add({targets:n,x:function(e){return e.endPos.x},y:function(e){return e.endPos.y},radius:0.1,duration:anime.random(1200,1800),easing:&quot;easeOutExpo&quot;,update:renderParticule}).add({targets:a,radius:anime.random(80,160),lineWidth:0,alpha:{value:0,easing:&quot;linear&quot;,duration:anime.random(600,800)},duration:anime.random(1200,1800),easing:&quot;easeOutExpo&quot;,update:renderParticule,offset:0})}function debounce(e,t){var a;return function(){var n=this,i=arguments;clearTimeout(a),a=setTimeout(function(){e.apply(n,i)},t)}}var canvasEl=document.querySelector(&quot;.fireworks&quot;);if(canvasEl){var ctx=canvasEl.getContext(&quot;2d&quot;),numberOfParticules=30,pointerX=0,pointerY=0,tap=&quot;mousedown&quot;,colors=[&quot;#FF1461&quot;,&quot;#18FF92&quot;,&quot;#5A87FF&quot;,&quot;#FBF38C&quot;],setCanvasSize=debounce(function(){canvasEl.width=2*window.innerWidth,canvasEl.height=2*window.innerHeight,canvasEl.style.width=window.innerWidth+&quot;px&quot;,canvasEl.style.height=window.innerHeight+&quot;px&quot;,canvasEl.getContext(&quot;2d&quot;).scale(2,2)},500),render=anime({duration:1/0,update:function(){ctx.clearRect(0,0,canvasEl.width,canvasEl.height)}});document.addEventListener(tap,function(e){&quot;sidebar&quot;!==e.target.id&amp;&amp;&quot;toggle-sidebar&quot;!==e.target.id&amp;&amp;&quot;A&quot;!==e.target.nodeName&amp;&amp;&quot;IMG&quot;!==e.target.nodeName&amp;&amp;(render.play(),updateCoords(e),animateParticules(pointerX,pointerY))},!1),setCanvasSize(),window.addEventListener(&quot;resize&quot;,setCanvasSize,!1)};</code></pre><p>然后在 \themes\material-x\layout\layout.ejs 文件中写入以下代码：</p>
+<pre><code>&lt;canvas class=&quot;fireworks&quot; style=&quot;position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;&quot; &gt;&lt;/canvas&gt; 
+&lt;script type=&quot;text/javascript&quot; src=&quot;//cdn.bootcss.com/animejs/2.2.0/anime.min.js&quot;&gt;&lt;/script&gt; 
+&lt;script type=&quot;text/javascript&quot; src=&quot;/js/fireworks.js&quot;&gt;&lt;/script&gt;</code></pre><h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/jpg/1%20(2)-1584122984188.png" alt=""></p>
+<h2 id="参考学习"><a href="#参考学习" class="headerlink" title="参考学习"></a>参考学习</h2><p><a href="https://blog.csdn.net/qq_36759224/article/details/85420403" target="_blank" rel="noopener">Hexo 博客优化之博客美化系列</a></p>
 
             </div>
             <hr/>
@@ -462,9 +490,8 @@ hexo d                                                     #将静态网页上�
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code
-安装步骤npm config set registry https://registry.npm.taobao.org    #配置国内的镜像源
-n
+                            hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code    4.Typora
+安装步骤npm config set registry https://registry.npm.taobao.org   
                         
                     </div>
                     <div class="publish-info">
@@ -518,9 +545,8 @@ n
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code
-安装步骤npm config set registry https://registry.npm.taobao.org    #配置国内的镜像源
-n
+                            hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code    4.Typora
+安装步骤npm config set registry https://registry.npm.taobao.org   
                         
                     </div>
                     <div class="publish-info">
