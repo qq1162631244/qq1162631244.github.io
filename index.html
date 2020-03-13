@@ -241,6 +241,13 @@
 
 <div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
     
+        <div id="prev-cover" class="left waves-effect carousel-control">
+            <i class="icon fa fa-angle-left"></i>
+        </div>
+        <div id="next-cover" class="right waves-effect carousel-control">
+            <i class="icon fa fa-angle-right"></i>
+        </div>
+    
 
     <div class="carousel-item red white-text bg-cover about-cover">
         <div class="container">
@@ -255,7 +262,18 @@
 
             <div class="description center-align">
                 
-                秋风起兮白云飞，草木黄落兮雁南归。
+                <span id="subtitle"></span>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: ['秋风起兮白云飞，草木黄落兮雁南归。',''],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: false,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
                 
             </div>
         </div>
@@ -274,6 +292,10 @@
                     <i class="fa fa-angle-double-down"></i>开始阅读
                 </a>
 
+                
+                    <a href="https://space.bilibili.com/1466173" class="waves-effect waves-light btn" target="_blank">
+                        <i class="fab fa-github-alt"></i>哔哩哔哩 - ( ゜- ゜)つロ 干杯~
+                    </a>
                 
             </div>
             <div class="cover-social-link">
@@ -295,6 +317,34 @@
         </div>
     </div>
 
+    
+        
+
+        
+            
+            <div class="carousel-item amber white-text carousel-post bg-cover"
+                 style="background-image: url('/medias/featureimages/1.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <div class="title center-align">hexo搭建个人博客</div>
+                            <div class="description center-align">
+                                
+                                    hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code
+安装步骤npm config set registry https://registry.npm.taobao.org    #配置国内的镜像源
+n
+                                
+                            </div>
+                            <div class="cover-btns">
+                                <a href="/2020/03/13/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="waves-effect waves-light btn" target="_blank">
+                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
     
 </div>
 
@@ -394,7 +444,7 @@ $(function () {
         volume: Number('0.7'),
         listFolded: 'false' === 'true',
         listMaxHeight: '',
-        audio: eval([{"name":"美の謀略 ~蛮神ラクシュミ討滅戦~","artist":"祖堅正慶","url":"http://lc-tfAMMWNN.cn-n1.lcfile.com/17ea8c2e6d6b5de1ecfe/%E7%A5%96%E5%A0%85%E6%AD%A3%E6%85%B6%20-%20%E7%BE%8E%E3%81%AE%E8%AC%80%E7%95%A5%20%7E%E8%9B%AE%E7%A5%9E%E3%83%A9%E3%82%AF%E3%82%B7%E3%83%A5%E3%83%9F%E8%A8%8E%E6%BB%85%E6%88%A6%7E.flac","cover":"http://lc-tfAMMWNN.cn-n1.lcfile.com/6b163d4f6d58ad3ea199/109951163392088961.jpg"}])
+        audio: eval([{"name":"洛少爷,封茗囧菌 - 如见青山（Cover：忘川风华录）","artist":"洛少爷,封茗囧菌","url":"http://lc-tfAMMWNN.cn-n1.lcfile.com/c86ebfb1dca34c199c3e/%E6%B4%9B%E5%B0%91%E7%88%B7%2C%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C%20-%20%E5%A6%82%E8%A7%81%E9%9D%92%E5%B1%B1%EF%BC%88Cover%EF%BC%9A%E5%BF%98%E5%B7%9D%E9%A3%8E%E5%8D%8E%E5%BD%95%EF%BC%89.flac","cover":"http://lc-tfAMMWNN.cn-n1.lcfile.com/69b5f15b47f43de9ffb7/109951164041641386.jpg"}])
     });
 });
 </script>
@@ -417,20 +467,21 @@ $(function () {
     
     
     <div class="col s12" >
-        <div class="post-card" style="background-image: url('/medias/featureimages/7.jpg')">
+        <div class="post-card" style="background-image: url('/medias/featureimages/1.jpg')">
             <div class="post-body">
                 <div class="post-categories">
                     
                         
-                            <a href="/categories/Markdown/" class="category">Markdown</a>
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="category">搭建博客</a>
                         
                     
                 </div>
-                <a href="/2020/03/13/hello-world/">
-                    <h3 class="post-title">你好世界</h3>
+                <a href="/2020/03/13/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+                    <h3 class="post-title">hexo搭建个人博客</h3>
                 </a>
-                <p class="post-description">holle word</p>
-                <a href="/2020/03/13/hello-world/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
+                <p class="post-description">hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code
+安装步骤npm config set registry https://reg</p>
+                <a href="/2020/03/13/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
                     <i class="icon far fa-eye fa-fw"></i>阅读更多
                 </a>
             </div>
@@ -459,20 +510,22 @@ $(function () {
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2020/03/13/hello-world/">
+                    <a href="/2020/03/13/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="你好世界">
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="hexo搭建个人博客">
                             
-                            <span class="card-title">你好世界</span>
+                            <span class="card-title">hexo搭建个人博客</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                holle word
+                                hexo搭建个人博客软件准备1.Node.js    2.git    3.Vs Code
+安装步骤npm config set registry https://registry.npm.taobao.org    #配置国内的镜像源
+n
                             
                         </div>
                         <div class="publish-info">
@@ -483,8 +536,8 @@ $(function () {
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Markdown/" class="post-category">
-                                    Markdown
+                                <a href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                    搭建博客
                                 </a>
                                 
                                 
@@ -495,12 +548,12 @@ $(function () {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/Typora/">
-                            <span class="chip bg-color">Typora</span>
+                        <a href="/tags/hexo/">
+                            <span class="chip bg-color">hexo</span>
                         </a>
                         
-                        <a href="/tags/Markdown/">
-                            <span class="chip bg-color">Markdown</span>
+                        <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">
+                            <span class="chip bg-color">搭建博客</span>
                         </a>
                         
                     </div>
