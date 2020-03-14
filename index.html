@@ -434,41 +434,57 @@
                     
 
                     
-                        
+                        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
 
-<link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
 <div class="music-player">
     
-    <div class="title center-align">
-        <i class="fas fa-music"></i>&nbsp;&nbsp;听听音乐
-    </div>
+        <div class="title center-align">
+            <i class="fas fa-music"></i>&nbsp;&nbsp;听听音乐
+        </div>
     
     <div class="row">
-        <div class="col l8 offset-l2 m10 offset-m1 s12">
-            <div id="aplayer" class="music"></div>
-        </div>
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4915383201"
+                   fixed='false'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
     </div>
 </div>
 
 <script src="/libs/aplayer/APlayer.min.js"></script>
-<script>
-$(function () {
-    new APlayer({
-        container: document.getElementById('aplayer'),
-        fixed: 'false' === 'true',
-        autoplay: 'true' === 'true',
-        theme: '#42b983',
-        loop: 'all',
-        order: 'list',
-        preload: 'auto',
-        volume: Number('0.7'),
-        listFolded: 'false' === 'true',
-        listMaxHeight: '',
-        audio: eval([{"name":"想你的三百六十五天","artist":"李玟","url":"http://lc-tfAMMWNN.cn-n1.lcfile.com/f2e1ec877899db84aadb/%E6%9D%8E%E7%8E%9F%20-%20%E6%83%B3%E4%BD%A0%E7%9A%84%E4%B8%89%E7%99%BE%E5%85%AD%E5%8D%81%E4%BA%94%E5%A4%A9.flac","cover":"http://lc-tfAMMWNN.cn-n1.lcfile.com/1c1777f9b4a3cddbb5c9/45079976755848.jpg"},{"name":"如见青山（Cover：忘川风华录）","artist":"洛少爷,封茗囧菌","url":"http://lc-tfAMMWNN.cn-n1.lcfile.com/c86ebfb1dca34c199c3e/%E6%B4%9B%E5%B0%91%E7%88%B7%2C%E5%B0%81%E8%8C%97%E5%9B%A7%E8%8F%8C%20-%20%E5%A6%82%E8%A7%81%E9%9D%92%E5%B1%B1%EF%BC%88Cover%EF%BC%9A%E5%BF%98%E5%B7%9D%E9%A3%8E%E5%8D%8E%E5%BD%95%EF%BC%89.flac","cover":"http://lc-tfAMMWNN.cn-n1.lcfile.com/69b5f15b47f43de9ffb7/109951164041641386.jpg"}])
-    });
-});
-</script>
-                    
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+                        
 
                     
 
