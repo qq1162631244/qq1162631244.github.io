@@ -27,6 +27,8 @@
     <base target="_blank"/>
     
     <script src="/libs/jquery/jquery.min.js"></script>
+
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
     
 <meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -359,7 +361,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1.7k
                 </div>
                 
 
@@ -410,6 +412,15 @@ hexo d                                                     #将静态网页上�
 </ul>
 <h2 id="实用小设置"><a href="#实用小设置" class="headerlink" title="实用小设置"></a>实用小设置</h2><p><strong>所有网页在新标签页打开：在网页公共头部head部分写入<base target="_blank"/></strong></p>
 <p><strong>外部文件储存：<a href="https://www.leancloud.cn/" target="_blank" rel="noopener">leancloud</a></strong></p>
+<p><strong>采用<a href="https://www.jinrishici.com/" target="_blank" rel="noopener">今日诗词</a>的每日一句</strong></p>
+<blockquote>
+<p>在/themes/hexo-theme-matery/layout/_partial/bg-cover-content.ejs</p>
+<p>把&lt;%# config.description %&gt;改为</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span>span id<span class="token operator">=</span><span class="token string">"jinrishici-sentence"</span><span class="token operator">></span>正在加载今日诗词<span class="token operator">...</span><span class="token punctuation">.</span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在/themes/hexo-theme-matery/layout/_partial/head.ejs</p>
+<p>添加代码</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">"https://sdk.jinrishici.com/v2/browser/jinrishici.js"</span> charset<span class="token operator">=</span><span class="token string">"utf-8"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</blockquote>
 <p><strong>解决动漫人物和不蒜子不能同时使用的bug</strong></p>
 <p>打开themes\matery\layout_partial中的footer.ejs，将本站总访问量和访客数的代码改为如下：</p>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&lt;</span><span class="token operator">%</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>theme<span class="token punctuation">.</span>busuanziStatistics <span class="token operator">&amp;&amp;</span> theme<span class="token punctuation">.</span>busuanziStatistics<span class="token punctuation">.</span>totalTraffic<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">%</span><span class="token operator">></span>      
