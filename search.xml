@@ -31,6 +31,33 @@
     
     
     <entry>
+      <title>图像增强处理——图像分割设计</title>
+      <link href="/2020/05/25/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E5%A4%84%E7%90%86%E8%AE%BE%E8%AE%A1/"/>
+      <url>/2020/05/25/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E5%A4%84%E7%90%86%E8%AE%BE%E8%AE%A1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="图像增强处理——图像去噪处理设计"><a href="#图像增强处理——图像去噪处理设计" class="headerlink" title="图像增强处理——图像去噪处理设计"></a>图像增强处理——图像去噪处理设计</h1><h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p><strong>MATLAB</strong></p><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>图像去噪是指减少数字图像中噪声的过程。现实中的数字图像在数字化和传输过程中常受到成像设备与外部环境噪声干扰等影响，称为含噪图像或噪声图像。噪声是图象干扰的重要原因。一幅图象在实际应用中可能存在各种各样的噪声,这些噪声可能在传输中产生,也可能在量化等处理中产生。</p><p>中值滤波器：它是一种常用的非线性平滑滤波器,其基本原理是把数字图像或数字序列中一点的值用该点的一个领域中各点值的中值代换其主要功能是让周围象素灰度值的差比较大的像素改取与周围的像素值接近的值,从而可以消除孤立的噪声点,所以中值滤波对于滤除图像的椒盐噪声非常有效。中值滤波器可以做到既去除噪声又能保护图像的边缘,从而获得较满意的复原效果,而且,在实际运算过程中不需要图象的统计特性,这也带来不少方便,但对一些细节多,特别是点、线、尖顶细节较多的图象不宜采用中值滤波的方法。</p><h2 id="算法程序"><a href="#算法程序" class="headerlink" title="算法程序"></a>算法程序</h2><pre class="line-numbers language-matlab"><code class="language-matlab"><span class="token comment" spellcheck="true">%读入图像</span>f <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'c.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>f <span class="token operator">=</span> <span class="token function">rgb2gray</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">imshow</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">title</span><span class="token punctuation">(</span><span class="token string">'(a)输入图像f'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">%为f图片叠加椒盐噪声噪声</span>F1<span class="token operator">=</span><span class="token function">imnoise</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span><span class="token string">'salt &amp; pepper'</span><span class="token punctuation">,</span><span class="token number">0.01</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">imshow</span><span class="token punctuation">(</span>F1<span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">title</span><span class="token punctuation">(</span><span class="token string">'(b)椒盐噪声破坏效果'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">%中值滤波</span>F2<span class="token operator">=</span><span class="token function">medfilt2</span><span class="token punctuation">(</span>F1<span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">subplot</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">imshow</span><span class="token punctuation">(</span>F2<span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">title</span><span class="token punctuation">(</span><span class="token string">'(c)中值滤波恢复结果'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/jpg/QQ%E6%88%AA%E5%9B%BE20200525165635.png" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 图像增强 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 图像去噪声 </tag>
+            
+            <tag> 中值滤波 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Topaz Gigapixel AI 图片无损放大</title>
       <link href="/2020/03/14/Topaz%20Gigapixel%20AI%20%E5%9B%BE%E7%89%87%E6%97%A0%E6%8D%9F%E6%94%BE%E5%A4%A7/"/>
       <url>/2020/03/14/Topaz%20Gigapixel%20AI%20%E5%9B%BE%E7%89%87%E6%97%A0%E6%8D%9F%E6%94%BE%E5%A4%A7/</url>
