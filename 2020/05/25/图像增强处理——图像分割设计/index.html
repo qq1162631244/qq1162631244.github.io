@@ -1,0 +1,972 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="图像增强处理——图像分割设计, 哀机">
+    <meta name="description" content="特征检测是计算机视觉和图像处理中的一个概念。它指的是使用计算机提取图像信息，决定每个图像的点是否属于一个图像特征。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>图像增强处理——图像分割设计 | 哀机</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <base target="_blank"/>
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">哀机</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">哀机</div>
+        <div class="logo-desc">
+            
+            秋风起兮白云飞，草木黄落兮雁南归。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">图像增强处理——图像分割设计</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Hough%E5%8F%98%E6%8D%A2/">
+                                <span class="chip bg-color">Hough变换</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">
+                                <span class="chip bg-color">图像分割</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/" class="post-category">
+                                图像增强
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-05-25
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    814
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    3 分
+                </div>
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="图像增强处理——图像分割设计"><a href="#图像增强处理——图像分割设计" class="headerlink" title="图像增强处理——图像分割设计"></a>图像增强处理——图像分割设计</h1><h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p><strong>MATLAB</strong></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>​    霍夫变换是一种特征检测(feature extraction)，被广泛应用在图像分析（image analysis）、计算机视觉(computer vision)以及数位影像处理(digital image processing)。霍夫变换是用来辨别找出物件中的特征，例如：线条。他的算法流程大致如下，给定一个物件、要辨别的形状的种类，算法会在参数空间(parameter space)中执行投票来决定物体的形状，而这是由累加空间(accumulator space)里的局部最大值(local maximum)来决定。</p>
+<p>​    Hough变换思想为：在原始图像坐标系下的一个点对应了参数坐标系中的一条直线，同样参数坐标系的一条直线对应了原始坐标系下的一个点，然后，原始坐标系下呈现直线的所有点，它们的斜率和截距是相同的，所以它们在参数坐标系下对应于同一个点。这样在将原始坐标系下的各个点投影到参数坐标系下之后，看参数坐标系下有没有聚集点，这样的聚集点就对应了原始坐标系下的直线。</p>
+<h2 id="算法程序"><a href="#算法程序" class="headerlink" title="算法程序"></a>算法程序</h2><pre class="line-numbers language-matlab"><code class="language-matlab">clc<span class="token punctuation">;</span>
+clear all
+close all
+<span class="token comment" spellcheck="true">%Step %%提取边缘检测图像%%%%%%%</span>
+RGB <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'d.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">%640*480</span>
+I<span class="token operator">=</span><span class="token function">rgb2gray</span><span class="token punctuation">(</span>RGB<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">% 图片用的是灰度图像</span>
+<span class="token punctuation">[</span>x<span class="token punctuation">,</span>y<span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">size</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+BW<span class="token operator">=</span><span class="token function">edge</span><span class="token punctuation">(</span>I<span class="token punctuation">,</span><span class="token string">'sobel'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">% figure(1);imshow(I);title(</span><span class="token string">'原图'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">% figure(2);imshow(BW);title(</span><span class="token string">'边缘检测图像'</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">%Step2 %%建立ρ，θ坐标系矩阵%%%%%%%%</span>
+rho_max <span class="token operator">=</span> <span class="token number">800</span><span class="token punctuation">;</span>                   <span class="token comment" spellcheck="true">%%sqrt(640^2+480^2)</span>
+accarray<span class="token operator">=</span><span class="token function">zeros</span><span class="token punctuation">(</span>rho_max<span class="token punctuation">,</span><span class="token number">178</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">%定义ρ，θ坐标系的数组，初值为0。</span>
+                                 <span class="token comment" spellcheck="true">%θ的最大值，180度</span>
+<span class="token comment" spellcheck="true">%Step3 建立cos，sin值表  θ=[0 180]                              </span>
+Theta<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">:</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">180</span><span class="token operator">:</span><span class="token keyword">pi</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">%定义θ数组，确定θ取值范围,细分180份 1°</span>
+cosvalue<span class="token operator">=</span><span class="token function">zeros</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">90</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">%%新建cos值表</span>
+sinvalue<span class="token operator">=</span><span class="token function">zeros</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">90</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">%%新建sin值表</span>
+ <span class="token keyword">for</span> k<span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">90</span>          <span class="token comment" spellcheck="true">%%计算0-90度角度值</span>
+     <span class="token function">cosvalue</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">floor</span><span class="token punctuation">(</span><span class="token function">cos</span><span class="token punctuation">(</span><span class="token function">Theta</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+     <span class="token function">sinvalue</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">floor</span><span class="token punctuation">(</span><span class="token function">sin</span><span class="token punctuation">(</span><span class="token function">Theta</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword">end</span>
+
+ <span class="token comment" spellcheck="true">%Step4 计算所有非零像素点的ρ，θ坐标并累加</span>
+<span class="token keyword">for</span> n<span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span>x<span class="token punctuation">,</span>
+   <span class="token keyword">for</span> m<span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span>y
+      <span class="token keyword">if</span> <span class="token function">BW</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span>m<span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">1</span>   <span class="token comment" spellcheck="true">%%如果像素是1 有边缘</span>
+         <span class="token keyword">for</span> k<span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">178</span>
+            <span class="token comment" spellcheck="true">%将θ值代入hough变换方程，求ρ值</span>
+             <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token operator">&lt;=</span><span class="token number">90</span><span class="token punctuation">)</span>
+                rho<span class="token operator">=</span><span class="token punctuation">(</span>m<span class="token operator">*</span><span class="token function">cosvalue</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token punctuation">(</span>n<span class="token operator">*</span><span class="token function">sinvalue</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">%%0-90°</span>
+             <span class="token keyword">else</span> 
+                rho<span class="token operator">=</span><span class="token punctuation">(</span>n<span class="token operator">*</span><span class="token function">cosvalue</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token number">-90</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">(</span>m<span class="token operator">*</span><span class="token function">sinvalue</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token number">-90</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">%%90-180°     </span>
+             <span class="token keyword">end</span>
+            <span class="token comment" spellcheck="true">%将ρ值与ρ最大值的和的一半作为ρ的坐标值（数组坐标），这样做是为了防止ρ值出现负数</span>
+              rho_int<span class="token operator">=</span><span class="token function">round</span><span class="token punctuation">(</span>rho<span class="token operator">/</span><span class="token number">2000</span><span class="token operator">+</span>rho_max<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">%在ρθ坐标（数组）中标识点，即计数累加</span>
+              <span class="token function">accarray</span><span class="token punctuation">(</span>rho_int<span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token operator">=</span><span class="token function">accarray</span><span class="token punctuation">(</span>rho_int<span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+         <span class="token keyword">end</span>
+      <span class="token keyword">end</span>
+   <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+<span class="token comment" spellcheck="true">%%Step5 寻找霍夫矩阵中前N个最大值</span>
+N <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+b<span class="token operator">=</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token function">reshape</span><span class="token punctuation">(</span>accarray<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">800</span><span class="token operator">*</span><span class="token number">178</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>m<span class="token punctuation">,</span>n<span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">find</span><span class="token punctuation">(</span>accarray<span class="token operator">></span><span class="token function">b</span><span class="token punctuation">(</span><span class="token number">800</span><span class="token operator">*</span><span class="token number">178</span><span class="token operator">-</span>N<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+TT<span class="token operator">=</span><span class="token punctuation">[</span>m<span class="token punctuation">,</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">%%Step6 显示霍夫变换矩阵及显示前N个最大值点</span>
+<span class="token function">figure</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+colormap gray<span class="token punctuation">;</span>
+<span class="token function">imagesc</span><span class="token punctuation">(</span>accarray<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">title</span><span class="token punctuation">(</span><span class="token string">'hough变换后的图'</span><span class="token punctuation">)</span>
+<span class="token function">set</span><span class="token punctuation">(</span>gca<span class="token punctuation">,</span><span class="token string">'YTick'</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token operator">:</span><span class="token number">20</span><span class="token operator">:</span><span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">set</span><span class="token punctuation">(</span>gca<span class="token punctuation">,</span><span class="token string">'XTick'</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token operator">:</span><span class="token number">5</span><span class="token operator">:</span><span class="token number">180</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">xlabel</span><span class="token punctuation">(</span><span class="token string">'\theta'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">ylabel</span><span class="token punctuation">(</span><span class="token string">'\rho'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+hold on 
+<span class="token function">plot</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span>m<span class="token punctuation">,</span><span class="token string">'*r'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">[</span>H<span class="token punctuation">,</span> T<span class="token punctuation">,</span> R<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">hough</span><span class="token punctuation">(</span>BW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+P <span class="token operator">=</span> <span class="token function">houghpeaks</span><span class="token punctuation">(</span>H<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'threshold'</span><span class="token punctuation">,</span> <span class="token function">ceil</span><span class="token punctuation">(</span><span class="token number">0.005</span><span class="token operator">*</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token function">H</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+x <span class="token operator">=</span> <span class="token function">T</span><span class="token punctuation">(</span><span class="token function">P</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> y <span class="token operator">=</span> <span class="token function">R</span><span class="token punctuation">(</span><span class="token function">P</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+lines <span class="token operator">=</span> <span class="token function">houghlines</span><span class="token punctuation">(</span>BW<span class="token punctuation">,</span>T<span class="token punctuation">,</span>R<span class="token punctuation">,</span>P<span class="token punctuation">,</span><span class="token string">'FillGap'</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">'MinLength'</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+figure<span class="token punctuation">,</span><span class="token function">imshow</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token punctuation">,</span>hold on
+<span class="token function">xlabel</span><span class="token punctuation">(</span><span class="token string">'直线检测结果'</span><span class="token punctuation">,</span><span class="token string">'FontSize'</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> k<span class="token operator">=</span><span class="token number">1</span><span class="token operator">:</span><span class="token function">length</span><span class="token punctuation">(</span>lines<span class="token punctuation">)</span>
+    xy <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token function">lines</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">.</span>point1<span class="token punctuation">;</span> <span class="token function">lines</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">.</span>point2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">plot</span><span class="token punctuation">(</span><span class="token function">xy</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">xy</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'LineWidth'</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">'Color'</span><span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/jpg/QQ%E6%88%AA%E5%9B%BE20200525163944.png" alt=""></p>
+
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Hough%E5%8F%98%E6%8D%A2/">
+                                    <span class="chip bg-color">Hough变换</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">
+                                    <span class="chip bg-color">图像分割</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/05/25/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E8%AE%BE%E8%AE%A1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="图像增强处理——图像分割设计">
+                        
+                        <span class="card-title">图像增强处理——图像分割设计</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            特征检测是计算机视觉和图像处理中的一个概念。它指的是使用计算机提取图像信息，决定每个图像的点是否属于一个图像特征。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/" class="post-category">
+                                    图像增强
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Hough%E5%8F%98%E6%8D%A2/">
+                        <span class="chip bg-color">Hough变换</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">
+                        <span class="chip bg-color">图像分割</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/14/Topaz%20Gigapixel%20AI%20%E5%9B%BE%E7%89%87%E6%97%A0%E6%8D%9F%E6%94%BE%E5%A4%A7/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Topaz Gigapixel AI 图片无损放大">
+                        
+                        <span class="card-title">Topaz Gigapixel AI 图片无损放大</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            软件采用了AI深度学习技术，可以帮助用户实现图片的“无损”放大功能，让低分辨率图片转为高分辨率、高质量图片
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="post-category">
+                                    图像处理
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                        <span class="chip bg-color">图像处理</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%97%A0%E6%8D%9F%E6%94%BE%E5%A4%A7/">
+                        <span class="chip bg-color">无损放大</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+    
+<!-- 代码块复制 -->
+
+
+<!-- 代码块收缩 -->
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://nigiyaka.gitee.io" target="_blank">哀机</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv"></span>
+                &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv"></span>
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "3";
+                    var startDate = "12";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+        <!-- 背景静止彩带 -->
+        
+            <script type="text/javascript">
+            var windowWidth = $(window).width();
+            if (windowWidth > 992) {
+                document.write('<script type="text/javascript" size="350" alpha="0.6" zIndex="-1" src="/libs/background/ribbon.min.js"><\/script>');
+            }
+            </script>
+
+        <!-- 背景雪花飘落特效 -->
+            <script type="text/javascript">
+                var windowWidth = $(window).width();
+                if (windowWidth > 768) {
+                    document.write('<script type="text/javascript" src="/js/xuehuapiaoluo.js"><\/script>');
+                }
+            </script>
+
+    <script src="/js/sakura.js"></script>
+    <script src="/js/wenzi.js"></script>
+    <script src="/js/mouseSlip.js"></script>
+
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+    <script type="text/javascript" src="/js/fireworks.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":300,"height":700},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
+
+</html>
